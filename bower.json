@@ -25,6 +25,7 @@
         "bower_components"
     ],
     "dependencies": {
-        "gridi-framework-core": "*"
+        "gridi-framework-core": "*",
+        "gridi-helpers-visibility": "*"
     }
 }

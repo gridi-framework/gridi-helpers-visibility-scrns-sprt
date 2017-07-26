@@ -3,15 +3,23 @@ $before-screen-prefix: null;
 @each $screen-prefix, $sizes in map-reverse(get-screens-map()) {
     @media(min-width: get-screen-size($screen-prefix, min)) {
         @if $gridi-helpers-visibility-screens-support-generate-from-classes and index($gridi-helpers-visibility-screens-support-from-classes-skip-screens, $screen-prefix) == null {
-            .#{$screen-prefix}-invisible {
-                visibility: hidden;
+            @each $class, $value in $gridi-helpers-visibility-classes {
+                @if index($gridi-helpers-visibility-screens-support-from-classes-skip-classes, $class) == null {
+                    .#{$screen-prefix}-#{$class} {
+                        visibility: $value;
+                    }
+                }
             }
         }
 
         @if not $before-screen-prefix {
             @if $gridi-helpers-visibility-screens-support-generate-only-classes and index($gridi-helpers-visibility-screens-support-only-classes-skip-screens, $screen-prefix) == null {
-                .only-#{$screen-prefix}-invisible {
-                    visibility: hidden;
+                @each $class, $value in $gridi-helpers-visibility-classes {
+                    @if index($gridi-helpers-visibility-screens-support-only-classes-skip-classes, $class) == null {
+                        .only-#{$screen-prefix}-#{$class} {
+                            visibility: $value;
+                        }
+                    }
                 }
             }
         }
@@ -19,16 +27,24 @@ $before-screen-prefix: null;
 
     @if $gridi-helpers-visibility-screens-support-generate-to-classes and index($gridi-helpers-visibility-screens-support-to-classes-skip-screens, $screen-prefix) == null {
         @media(max-width: get-screen-size($screen-prefix, max)) {
-            .to-#{$screen-prefix}-invisible {
-                visibility: hidden;
+            @each $class, $value in $gridi-helpers-visibility-classes {
+                @if index($gridi-helpers-visibility-screens-support-to-classes-skip-classes, $class) == null {
+                    .to-#{$screen-prefix}-#{$class} {
+                        visibility: $value;
+                    }
+                }
             }
         }
     }
 
     @if $before-screen-prefix and $gridi-helpers-visibility-screens-support-generate-only-classes and index($gridi-helpers-visibility-screens-support-only-classes-skip-screens, $screen-prefix) == null {
         @media(min-width: get-screen-size($screen-prefix, min)) and (max-width: get-screen-size($before-screen-prefix, max)) {
-            .only-#{$screen-prefix}-invisible {
-                visibility: hidden;
+            @each $class, $value in $gridi-helpers-visibility-classes {
+                @if index($gridi-helpers-visibility-screens-support-only-classes-skip-classes, $class) == null {
+                    .only-#{$screen-prefix}-#{$class} {
+                        visibility: $value;
+                    }
+                }
             }
         }
     }
